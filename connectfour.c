@@ -15,6 +15,13 @@ int main() {
 }
 
 int printboard(int board[]) {
+    for (int row = ROW - 1; row >= 0; row--) {
+        for (int col = 0; col <= COL - 1; col++) {
+            printf("%d ", board[getidx(row, col)]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
 
 /* get column index from 0 (left) to 6 (right) */
@@ -25,6 +32,10 @@ int getcol(int idx) {
 /* get row index from 0 (bottom) to 5 (top) */
 int getrow(int idx) {
     return idx / COL;
+}
+
+int getidx(int row, int col) {
+    return row * COL + col;
 }
 
 int makemove(int col, int player, int board[]) {
