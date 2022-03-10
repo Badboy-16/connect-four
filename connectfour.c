@@ -6,6 +6,7 @@
 #define COL 7
 #define ROW 6
 #define GRID COL*ROW
+#define WIN 4
 
 int main() {
     int board[GRID]; /* board indices start from 0 at bottom left */
@@ -49,4 +50,58 @@ int makemove(int col, int player, int board[]) {
 }
 
 int checkwin(int board[]) {
+    /* check horizontal connection */
+    int connection[WIN];
+    for (int row = 0; row < ROW; row++) {
+        for (int col = 0; col <= COL - WIN; col++) {
+            for (int space = 0; space < WIN; space++) {
+                connection[space] = board[getidx(row, col+space)];
+            }
+            if (winplayer(connection) != 0) {
+                return winplayer(connection);
+            }
+        }
+    }
+    for (int col = 0; col < COL; col++) {
+        for (int row = 0; row < ROW - WIN; row++) {
+            for (int space = 0; space < WIN; space++) {
+                connection[space] = board[getidx(row+space, col)];
+            }
+            if (winplayer(connection) != 0) {
+                return winplayer(connection);
+            }
+        }
+    }
+    for (int col = 0; col < COL - WIN; col++) {
+        for (int row = 0; row < ROW - WIN; row++) {
+            for (int space = 0; space < WIN; space++) {
+                connection[space] = board[getidx(row+space, col+space)];
+            }
+            if (winplayer(connection) != 0) {
+                return winplayers(connection);
+            }
+        }
+    }
+    for (int col = 0; col < COL - WIN; col++) {
+        for (int row = ROW - 1; row > ROW - WIN; row--) {
+            for (int space = 0; space < WIN; space++) {
+                connection[space] = board[getidx(row-space, col+space)];
+            }
+            if (winplayer(connection) != 0 {
+                return winplayers(connection);
+            }
+        }
+    }
+}
+
+int winplayer(int connection[]) {
+    if (sizeof(connection) / sizeof(int) == 1) {
+        return connection[0];
+    }
+    for (int idx = 0; idx < sizeof(connection) / sizeof(int) - 1; idx++) {
+        if (connection[idx] != connection[idx+1]) {
+            return 0;
+        }
+    }
+    return connection[0];
 }
