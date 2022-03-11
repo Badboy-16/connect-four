@@ -78,7 +78,7 @@ int checkwin(int board[]) {
                 connection[space] = board[getidx(row+space, col+space)];
             }
             if (winplayer(connection) != 0) {
-                return winplayers(connection);
+                return winplayer(connection);
             }
         }
     }
@@ -88,7 +88,7 @@ int checkwin(int board[]) {
                 connection[space] = board[getidx(row-space, col+space)];
             }
             if (winplayer(connection) != 0) {
-                return winplayers(connection);
+                return winplayer(connection);
             }
         }
     }
